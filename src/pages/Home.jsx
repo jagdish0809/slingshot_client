@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import Webcam from 'react-webcam';
 import Styles from './Home.module.css';
-import Camera from "react-html5-camera-photo";
-import "react-html5-camera-photo/build/css/index.css";
 
 const Home = () => {
-    const handleTakePhoto = (dataUri) => {
-        console.log("got herer")
-    }
-  return (
-    <Camera
-      onTakePhoto={(dataUri) => {
-        handleTakePhoto(dataUri);
-      }}
-    />
-  );
-}
+  const webcamRef = useRef(null);
 
-export default Home
+  const capture = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    // `imageSrc` contains the captured image data URL
+    console.log(imageSrc);
+
+    // Now, you can save or process the captured image as needed
+    // For example, you can send it to a server, display it on the page, or save it to local storage.
+  };
+
+  return (
+    <div>
+      <Webcam
+        audio={false}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+      />
+      <button onClick={capture} className={`Styles.captureButton`}>capture button</button>
+    </div>
+  );
+};
+
+export default Home;
