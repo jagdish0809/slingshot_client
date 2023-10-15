@@ -6,6 +6,7 @@ const MainAnim = () => {
   const [imgslist, setImgsList] = useState([]);
   // let [imageCounter, setImageCounter] = useState(0)
 
+
   const fetchImages = async () => {
     try{
       const url =
@@ -21,10 +22,17 @@ const MainAnim = () => {
             };
             console.log(newImage, );
       setImgsList((prev) => [...prev, newImage]);
-      // setarrylen(arrylen++);
       // const response = await axios.get("backend ka endpoint");
       // if(response.status === 200){
-      //   setImgsList((prev)=> [...prev, response.data])
+      //  const newImage = {
+            //   url: response ka url,
+            //   top:
+            //     Math.floor(Math.random() * (window.innerHeight -200)) + "px",
+            //   left:
+            //     Math.floor(Math.random() * (window.innerWidth - 200)) + "px",
+            //   randomn: Math.floor(Math.random() * (200 - 70 + 1)) + 70
+            // };
+      //   setImgsList((prev)=> [...prev, newImage])
       // }
     }catch(error){
         console.log(error)

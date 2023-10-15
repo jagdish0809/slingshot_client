@@ -9,3 +9,9 @@
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
+
+body{
+    background-image: url(./assets/bgimg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -1,43 +1,61 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Styles from './UserForm.module.css';
+import axios from 'axios';
 
-const UserForm = () => {
+const defaultinput = {
+  name: "",
+  message: "",
+  image: "",
+}
+const UserForm = (props) => {
+  const [userinput, setUserinput] = useState(defaultinput);
+  const [thankyou, setThankyou] = useState(false)
+
+  const inputchangehandler = (key, value) => {
+    setUserinput({...userinput, [key]: value})
+  }
+
+  const formsubmithandler = async (e) => {
+    e.preventDefault();
+    try{
+      setUserinput({...userinput, image: props.passedimg})
+      console.log(userinput)
+      // const postuser = await axios.post("/upload", userinput);
+      // console.log(postuser)
+      // if(Response.status === 200){
+      //   setThankyou(true)
+      //   setUserinput(defaulinput)
+      // } else {
+      //   console.log("something went wrong!!")
+      // }
+    }catch(error){
+      console.log("error")
+    }
+  }
   return (
     <>
       <div className={`${Styles.userform_main}`}>
-        <form action="" className={`${Styles.userform_form}`}>
+        {!thankyou ? <form action="" className={`${Styles.userform_form}`} onSubmit={formsubmithandler}>
           <div className={`${Styles.user_imgdiv}`}>
             <img
-              src="https://static.toiimg.com/thumb/msid-98627667,imgsize-40206,width-400,resizemode-4/98627667.jpg"
-              alt=""
+              src={props.passedimg ? props.passedimg : ""}
+              alt="your selfie"
             />
           </div>
           <div className={`${Styles.form_subdiv}`}>
             <label htmlFor="" className={`${Styles.form_label}`}>
               Name
             </label>
-            <input type="text" name="" className={`${Styles.form_input}`} />
+            <input type="text" id="name" name="" className={`${Styles.form_input}`} onChange={(e)=> inputchangehandler("name", e.target.value)}/>
           </div>
           <div className={`${Styles.form_subdiv}`}>
             <label htmlFor="" className={`${Styles.form_label}`}>
-              Company Name
+              Message
             </label>
-            <input type="text" className={`${Styles.form_input}`} />
+            <textarea row="10" type="text" className={`${Styles.form_input}`} onChange={(e)=>inputchangehandler("message", e.target.value)} />
           </div>
-          <div className={`${Styles.form_subdiv}`}>
-            <label htmlFor="" className={`${Styles.form_label}`}>
-              Phone
-            </label>
-            <input type="number" className={`${Styles.form_input}`} />
-          </div>
-          <div className={`${Styles.form_subdiv}`}>
-            <label htmlFor="" className={`${Styles.form_label}`}>
-              Email
-            </label>
-            <input type="email" className={`${Styles.form_input}`} />
-          </div>
-          <button className={`${Styles.submitbtn}`}>Submit</button>
-        </form>
+          <button className={`${Styles.submitbtn}`} type="submit ">Submit</button>
+        </form> : <h1>Thank you!</h1> }
       </div>
     </>
   );

@@ -1,27 +1,55 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import Styles from './Home.module.css';
+import { useNavigate } from 'react-router';
 
-const Home = () => {
+const Home = (props) => {
   const webcamRef = useRef(null);
+  const [imgclicked, setImgClicked] = useState(null);
+  const navigation = useNavigate()
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    // `imageSrc` contains the captured image data URL
-    console.log(imageSrc);
-
-    // Now, you can save or process the captured image as needed
-    // For example, you can send it to a server, display it on the page, or save it to local storage.
+    // console.log(imageSrc)
+    setImgClicked(imageSrc);
   };
 
+  const retakebtnhandler = () => {
+    // console.log("retake")
+    setImgClicked(null)
+  }
+  
+  const submitbtnhandler = () => {
+    props.passimg(imgclicked) 
+    navigation("/userregistration");
+  }
   return (
-    <div>
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-      />
-      <button onClick={capture} className={`Styles.captureButton`}>capture button</button>
+    <div className={`${Styles.homepagemain}`}>
+      {!imgclicked ? (
+        <>
+          <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+          <button
+            onClick={capture}
+            className={`${Styles.captureButton}`}
+          ></button>
+        </>
+      ) : (
+        <>
+        <div className={`${Styles.showimgdiv}`}>
+          <img src={imgclicked} alt="" />
+          <div className={`${Styles.showimgdivbtns}`}>
+          <button className={`${Styles.btn} ${Styles.retakbtn}`} onClick={retakebtnhandler}>
+            {" "}
+            Retake
+          </button>
+          <button className={`${Styles.btn} ${Styles.confirmbtn}`} onClick={submitbtnhandler}>
+            {" "}
+            Submit{" "}
+          </button>
+          </div>
+        </div>
+        </>
+      )}
     </div>
   );
 };
