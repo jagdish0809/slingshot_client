@@ -18,20 +18,16 @@ const UserForm = (props) => {
   const formsubmithandler = async (e) => {
     e.preventDefault();
     try{
-      // setUserinput({...userinput, image: props.passedimg})
-      console.log(props.passedimg)
       const data = new FormData();
       data.append("name", userinput.name);
       data.append("message", userinput.message);
       data.append("image", props.passedimg);
-      console.log(data, "data")
-      // console.log(userinput)
       for (const pair of data.entries()) {
         console.log(pair[0], pair[1]);
       }
       const postuser = await axios.post("https://rich-cyan-cobra-wrap.cyclic.app/upload", data);
-      console.log(postuser)
       if(postuser.status === 200){
+        console.log(postuser)
         setThankyou(true)
         setUserinput(defaultinput)
       } else {

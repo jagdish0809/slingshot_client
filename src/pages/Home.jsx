@@ -27,7 +27,14 @@ const Home = (props) => {
     <div className={`${Styles.homepagemain}`}>
       {!imgclicked ? (
         <>
-          <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+          {/* <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" /> */}
+          <div className={`${Styles.webcamContainer}`}>
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+            />
+          </div>
           <button
             onClick={capture}
             className={`${Styles.captureButton}`}
@@ -35,19 +42,45 @@ const Home = (props) => {
         </>
       ) : (
         <>
-        <div className={`${Styles.showimgdiv}`}>
-          <img src={imgclicked} alt="" />
-          <div className={`${Styles.showimgdivbtns}`}>
-          <button className={`${Styles.btn} ${Styles.retakbtn}`} onClick={retakebtnhandler}>
-            {" "}
-            Retake
-          </button>
-          <button className={`${Styles.btn} ${Styles.confirmbtn}`} onClick={submitbtnhandler}>
-            {" "}
-            Submit{" "}
-          </button>
+          {/* <div className={`${Styles.showimgdiv}`}>
+            <img src={imgclicked} alt="" />
+            <div className={`${Styles.showimgdivbtns}`}>
+              <button
+                className={`${Styles.btn} ${Styles.retakbtn}`}
+                onClick={retakebtnhandler}
+              >
+                {" "}
+                Retake
+              </button>
+              <button
+                className={`${Styles.btn} ${Styles.confirmbtn}`}
+                onClick={submitbtnhandler}
+              >
+                {" "}
+                Submit{" "}
+              </button>
+            </div>
+          </div> */}
+
+          <div className={`${Styles.showimgdiv}`}>
+            <div className={`${Styles.circularImage}`}>
+              <img src={imgclicked} alt="" />
+            </div>
+            <div className={`${Styles.showimgdivbtns}`}>
+              <button
+                className={`${Styles.btn} ${Styles.retakbtn}`}
+                onClick={retakebtnhandler}
+              >
+                Retake
+              </button>
+              <button
+                className={`${Styles.btn} ${Styles.confirmbtn}`}
+                onClick={submitbtnhandler}
+              >
+                Submit
+              </button>
+            </div>
           </div>
-        </div>
         </>
       )}
     </div>
