@@ -13,8 +13,11 @@
   animation-duration: 3s, 3x; */
   animation-name: Position, sizeforimg;
   animation-duration: 3s, 3s;
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
+  /* width: 250px;
+  height: 250px; */
+  border: 10px solid #FFD700;
 }
 
 .borderimg {
@@ -24,6 +27,50 @@
   width: 160px;
   height: 160px;
 }
+
+
+/* =============================================================================== */
+.imgandtextdiv{
+  position: absolute;
+  animation-name: Position, divsize;
+  animation-duration: 3s, 3s;
+  /* width: fit-content; */
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.imgandtextdivhist{
+  position: absolute;
+    width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: -10;
+}
+
+/* .imgandtextdiv{
+  position: relative;
+} */
+
+.img{
+  width: 10vw;
+  height: 10vw;
+  border-radius: 50%;
+  border: 10px solid #FFD700;
+  object-fit: cover;
+}
+.textname, .textmessage{
+  color: white;
+  text-align: center;
+}
+
+
+
+/* ============================================================================================ */
 
 @keyframes Position {
   from {
@@ -39,24 +86,37 @@
 
 @keyframes sizeforimg {
   from {
-    width: 300px;
-    height: 300px;
+    /* width: 25%;
+    height: 46%; */
+    width: 40vw;
+    height: 40vw;
 
   }
   to {
-    width: 100px;
-    height: 100px;
+    width: 10vw;
+    height: 10vw;
+    /* width: 250px;
+    height: 250px; */
+    /* transform: scale(0); */
   }
 }
 
 
 @keyframes sizeforborder {
   from {
-    width: 460px;
-    height: 460px;
+
   }
   to {
     width: 160px;
     height: 160px;
+  }
+}
+
+@keyframes divsize {
+  from{
+    transform: scale(2);
+  }
+  to{
+    transform: scale(1);
   }
 }

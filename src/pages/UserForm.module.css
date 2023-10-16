@@ -5,7 +5,7 @@
     align-items: center;
 }
 
-.userform_form{
+.userform_form, .thankyoudiv{
     padding: 20px;
     background: #fff;
     border: 1px solid #000;
@@ -13,6 +13,10 @@
     margin: 20px;
         width: 96vw;
     max-width: 600px;
+}
+
+.thankyoudiv{
+    color: #000;
 }
 
 .user_imgdiv{

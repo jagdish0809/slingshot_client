@@ -25,10 +25,10 @@ const UserForm = (props) => {
       for (const pair of data.entries()) {
         console.log(pair[0], pair[1]);
       }
+      setThankyou(true)
       const postuser = await axios.post("https://rich-cyan-cobra-wrap.cyclic.app/upload", data);
       if(postuser.status === 200){
         console.log(postuser)
-        setThankyou(true)
         setUserinput(defaultinput)
       } else {
         console.log("something went wrong!!")
@@ -40,27 +40,52 @@ const UserForm = (props) => {
   return (
     <>
       <div className={`${Styles.userform_main}`}>
-        {!thankyou ? <form action="" className={`${Styles.userform_form}`} onSubmit={formsubmithandler}>
-          <div className={`${Styles.user_imgdiv}`}>
-            <img
-              src={props.passedimg ? props.passedimg : ""}
-              alt="your selfie"
-            />
-          </div>
-          <div className={`${Styles.form_subdiv}`}>
-            <label htmlFor="" className={`${Styles.form_label}`}>
-              Name
-            </label>
-            <input type="text" id="name" name="" className={`${Styles.form_input}`} onChange={(e)=> inputchangehandler("name", e.target.value)}/>
-          </div>
-          <div className={`${Styles.form_subdiv}`}>
-            <label htmlFor="" className={`${Styles.form_label}`}>
-              Message
-            </label>
-            <textarea row="10" type="text" className={`${Styles.form_input}`} onChange={(e)=>inputchangehandler("message", e.target.value)} />
-          </div>
-          <button className={`${Styles.submitbtn}`} type="submit ">Submit</button>
-        </form> : <h1>Thank you!</h1> }
+        {!thankyou ? (
+          <form
+            action=""
+            className={`${Styles.userform_form}`}
+            onSubmit={formsubmithandler}
+          >
+            <div className={`${Styles.user_imgdiv}`}>
+              <img
+                src={props.passedimg ? props.passedimg : ""}
+                alt="your selfie"
+              />
+            </div>
+            <div className={`${Styles.form_subdiv}`}>
+              <label htmlFor="" className={`${Styles.form_label}`}>
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name=""
+                className={`${Styles.form_input}`}
+                onChange={(e) => inputchangehandler("name", e.target.value)}
+              />
+            </div>
+            <div className={`${Styles.form_subdiv}`}>
+              <label htmlFor="" className={`${Styles.form_label}`}>
+                Message
+              </label>
+              <textarea
+                row="10"
+                type="text"
+                className={`${Styles.form_input}`}
+                onChange={(e) => inputchangehandler("message", e.target.value)}
+              />
+            </div>
+            <button className={`${Styles.submitbtn}`} type="submit ">
+              Submit
+            </button>
+          </form>
+        ) : (
+          <>
+            <div className={`${Styles.thankyoudiv}`}>
+              <h1>Thank you!</h1>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
