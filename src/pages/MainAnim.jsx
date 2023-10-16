@@ -6,8 +6,13 @@ import border from "../assets/border.png";
 const MainAnim = () => {
   const [imgslist, setImgsList] = useState([]);
   const [imghistory, setImgHistory] = useState([]);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
   let histarr = [];
+
+    const handleImageLoad = () => {
+      setImageLoaded(true);
+    };
 
   const fetchImages = async () => {
     try {
@@ -24,6 +29,8 @@ const MainAnim = () => {
           name: response.data.name,
           message: response.data.message,
           // url: "https://res.cloudinary.com/difgb8jth/image/upload/v1697376847/dyhpgufwztncbd5xg9a2.jpg",
+          // name: "Jagdish",
+          // message: "Hello everyone",
           top: Math.floor(Math.random() * (window.innerHeight - 300)) + "px",
           left: Math.floor(Math.random() * (window.innerWidth - 200)) + "px",
           randomn: Math.floor(Math.random() * (200 - 70 + 1)) + 70,
@@ -59,42 +66,26 @@ const MainAnim = () => {
       {imgslist.length > 0
         ? imgslist.map((item, index) => (
             <>
-              {/* <img
-                key={index}
-                className={`${Styles.image}`}
+              <img
                 src={item.url}
-                alt=""
-                style={{
-                  top: item.top,
-                  left: item.left,
-                }}
-              /> */}
-
-              {/*vo border ke img k liye hai */}
-              {/* <img
-                src={border}
-                alt=""
-                className={`${Styles.borderimg}`}
-                style={{
-                  top: `calc(${item.top} - 30px)`,
-                  left: `calc(${item.left} - 30px)`,
-                }}
-              /> */}
-
-              <div
-                className={`${Styles.imgandtextdiv}`}
-                style={{
-                  top: item.top,
-                  left: item.left,
-                }}
-                key={index}
-              >
-                <img src={item.url} className={`${Styles.img}`} />
-                <h1 className={`${Styles.textname}`}>{item.name}</h1>
-                <p className={`${Styles.textmessage}`}>
-                  {item.message}
-                </p>
-              </div>
+                alt="Your Image"
+                onLoad={handleImageLoad}
+                style={{ display: "none" }}
+              />
+              {imageLoaded && (
+                <div
+                  className={`${Styles.imgandtextdiv}`}
+                  style={{
+                    top: item.top,
+                    left: item.left,
+                  }}
+                  key={index}
+                >
+                  <img src={item.url} className={`${Styles.img}`} />
+                  <h1 className={`${Styles.textname}`}>{item.name}</h1>
+                  <p className={`${Styles.textmessage}`}>{item.message}</p>
+                </div>
+              )}
             </>
           ))
         : ""}
@@ -111,9 +102,7 @@ const MainAnim = () => {
               >
                 <img src={item.url} className={`${Styles.img}`} />
                 <h1 className={`${Styles.textname}`}>{item.name}</h1>
-                <p className={`${Styles.textmessage}`}>
-                  {item.message}
-                </p>
+                <p className={`${Styles.textmessage}`}>{item.message}</p>
               </div>
             </>
           ))
